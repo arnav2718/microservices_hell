@@ -28,18 +28,18 @@ public class AdminProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productDto1);
     }
 
-//    @GetMapping("/products")
-//    public ResponseEntity<List<ProductDto>> getAllProducts() {
-//        List<ProductDto> productDtos = adminProductService.getAllProducts();
-//        return ResponseEntity.ok(productDtos);
-//    }
-@GetMapping("/products")
-public ResponseEntity<Page<Product>> getProducts(@RequestParam(defaultValue = "0") int page,
-                                                 @RequestParam(defaultValue = "10") int size) {
-    Pageable pageable = PageRequest.of(page, size);
-    Page<Product> productPage = adminProductService.getPaginatedProducts(pageable);
-    return ResponseEntity.ok(productPage);
-}
+    @GetMapping("/products")
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
+        List<ProductDto> productDtos = adminProductService.getAllProducts();
+        return ResponseEntity.ok(productDtos);
+    }
+//@GetMapping("/products")
+//public ResponseEntity<Page<Product>> getProducts(@RequestParam(defaultValue = "0") int page,
+//                                                 @RequestParam(defaultValue = "10") int size) {
+//    Pageable pageable = PageRequest.of(page, size);
+//    Page<Product> productPage = adminProductService.getPaginatedProducts(pageable);
+//    return ResponseEntity.ok(productPage);
+//}
 
 
     @GetMapping("/search/{name}")

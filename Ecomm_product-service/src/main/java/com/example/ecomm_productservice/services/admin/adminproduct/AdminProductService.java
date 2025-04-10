@@ -18,6 +18,6 @@ public interface AdminProductService {
 
     boolean deleteProduct (Long id);
 
-    Page<Product> getPaginatedProducts(Pageable pageable);
-//    Page<ProductDto> getAllProductsPaginated(int page, int size);
+//    Page<Product> getPaginatedProducts(Pageable pageable);
+
 }

@@ -8,8 +8,8 @@ public interface CustomerProductService {
 
     List<ProductDto> getAllProducts();
 
-    List<ProductDto> getAllProductsByName(String name);
+//    List<ProductDto> getAllProductsByName(String name);
 
-//    List<ProductDto> getAllProductsByTitle(String title);
+    List<ProductDto> searchProductByTitle(String title);
 
 }

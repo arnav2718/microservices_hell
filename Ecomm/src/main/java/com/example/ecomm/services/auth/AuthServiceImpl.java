@@ -9,6 +9,7 @@ import com.example.ecomm.enums.UserRole;
 import com.example.ecomm.repository.OrderRepository;
 import com.example.ecomm.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
     private OrderRepository orderRepository;
 
     // ✅ Correctly injecting dependencies via constructor

@@ -26,9 +26,6 @@ public class AdminProductServiceImpl implements AdminProductService{
 
     private final CategoryRepository categoryRepository;
 
-//    @Autowired
-//    private ModelMapper modelMapper;
-
     public ProductDto addProduct (ProductDto productDto) throws IOException {
         Product product = new Product();
         product.setName (productDto.getName());
@@ -46,9 +43,9 @@ public class AdminProductServiceImpl implements AdminProductService{
         List<Product> products = productRepository.findAll();
         return products.stream().map(Product::getDto).collect(Collectors.toList());
     }
-    public Page<Product> getPaginatedProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
-    }
+//    public Page<Product> getPaginatedProducts(Pageable pageable) {
+//        return productRepository.findAll(pageable);
+//    }
 
     public List<ProductDto> getAllProductsByName(String name){
         List<Product> products = productRepository.findAllByNameContaining(name);
