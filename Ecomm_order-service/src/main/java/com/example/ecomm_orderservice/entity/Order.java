@@ -1,7 +1,9 @@
 package com.example.ecomm_orderservice.entity;
 
 
+import com.example.ecomm_orderservice.dto.OrderDto;
 import com.example.ecomm_orderservice.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,6 +15,7 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "orders")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,5 +45,20 @@ public class Order {
 
     @OneToMany (fetch = FetchType.LAZY, mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItems> cartItems;
+
+    public OrderDto getOrderDto() {
+        OrderDto orderDto = new OrderDto();
+
+        orderDto.setId(id);
+        orderDto.setOrderDescription(orderDescription);
+        orderDto.setAddress(address);
+        orderDto.setTrackingId(trackingId);
+        orderDto.setDate(date);
+        orderDto.setAmount(amount);
+        orderDto.setOrderStatus(orderStatus);
+        orderDto.setUserName(user.getName());
+
+        return orderDto;
+    }
 }
 

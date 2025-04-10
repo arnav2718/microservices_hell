@@ -2,6 +2,7 @@ package com.example.ecomm_orderservice.entity;
 
 import com.example.ecomm_orderservice.dto.ProductDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Data
 @Table(name ="product")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
 
     @Id

@@ -2,12 +2,14 @@ package com.example.ecomm_orderservice.entity;
 
 
 import com.example.ecomm_orderservice.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "users")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 
     @Id
@@ -23,5 +25,4 @@ public class User {
     @Column(columnDefinition = "longBlob")
     private byte[] img;
 
-    // Getters and Setters
 }
