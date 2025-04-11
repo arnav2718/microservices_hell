@@ -1,10 +1,15 @@
 package com.example.ecomm_productservice.controller.admin;
 
+import com.example.ecomm_productservice.dto.FAQDto;
 import com.example.ecomm_productservice.dto.ProductDto;
 import com.example.ecomm_productservice.entity.Product;
+import com.example.ecomm_productservice.repository.FAQRepository;
 import com.example.ecomm_productservice.services.admin.adminproduct.AdminProductService;
+import com.example.ecomm_productservice.services.admin.faq.FAQService;
 import lombok.RequiredArgsConstructor;
 //import org.hibernate.query.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +26,10 @@ import java.util.List;
 public class AdminProductController {
 
     private final AdminProductService adminProductService;
+
+    private final FAQService faqService;
+
+//    private static final Logger logger = LoggerFactory.getLogger(AdminProductController.class);
 
     @PostMapping("/product")
     public ResponseEntity<ProductDto> addProduct(@ModelAttribute ProductDto productDto) throws IOException {
@@ -55,5 +64,30 @@ public class AdminProductController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/faq/{productId}")
+    public ResponseEntity<FAQDto> postFAQ (@PathVariable Long productId, @RequestBody FAQDto faqDto){
+        return ResponseEntity.status(HttpStatus.CREATED). body (faqService.postFAQ (productId, faqDto));
+    }
+
+    @GetMapping("/product/{productId}")
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long productId) {
+        ProductDto productDto = adminProductService.getProductById(productId);
+        if (productDto != null) {
+            return ResponseEntity.ok(productDto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/product/{productId}")
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long productId, @ModelAttribute ProductDto productDto) throws IOException {
+        ProductDto updatedProduct = adminProductService.updateProduct(productId, productDto);
+        if (updatedProduct != null) {
+            return ResponseEntity.ok(updatedProduct);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

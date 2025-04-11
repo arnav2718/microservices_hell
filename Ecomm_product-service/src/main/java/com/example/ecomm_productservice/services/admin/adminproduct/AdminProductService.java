@@ -18,6 +18,8 @@ public interface AdminProductService {
 
     boolean deleteProduct (Long id);
 
-//    Page<Product> getPaginatedProducts(Pageable pageable);
+    ProductDto getProductById(Long productId);
+
+    ProductDto updateProduct(Long productId, ProductDto productDto) throws IOException;
 
 }
