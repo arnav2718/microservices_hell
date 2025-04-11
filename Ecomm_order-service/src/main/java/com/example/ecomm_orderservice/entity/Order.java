@@ -3,6 +3,7 @@ package com.example.ecomm_orderservice.entity;
 
 import com.example.ecomm_orderservice.dto.OrderDto;
 import com.example.ecomm_orderservice.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -39,11 +40,13 @@ public class Order {
 
     private UUID trackingId;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
     private User user;
 
     @OneToMany (fetch = FetchType.LAZY, mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<CartItems> cartItems;
 
     public OrderDto getOrderDto() {
