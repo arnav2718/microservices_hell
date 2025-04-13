@@ -1,5 +1,6 @@
 package com.example.ecomm_orderservice.Controller.admin;
 
+import com.example.ecomm_orderservice.dto.AnalyticsResponse;
 import com.example.ecomm_orderservice.dto.OrderDto;
 import com.example.ecomm_orderservice.services.admin.adminOrder.AdminOrderService;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +32,11 @@ public class AdminOrderController {
         if (orderDto == null)
             return new ResponseEntity<> ( "Something went wrong!", HttpStatus.BAD_REQUEST);
         return ResponseEntity.status(HttpStatus.OK). body (orderDto);
+    }
+
+    @GetMapping("/order/analytics")
+    public ResponseEntity<AnalyticsResponse> getAnalytics() {
+
+        return ResponseEntity.ok(adminOrderService.calculateAnalytics());
     }
 }
